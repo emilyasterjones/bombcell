@@ -223,15 +223,19 @@ if param.extractRaw
 end
 
 fprintf('\n Finished extracting quality metrics from %s', param.rawFile)
+
+%extract measures from metrics.csv
+ecephys_qMetrics = readtable([param.ephysKilosortPath filesep 'metrics.csv']);
+qMetric.ecephys_snr = ecephys_qMetrics.snr';
+qMetric.ecephys_halfwidth = ecephys_qMetrics.halfwidth';
+
 try
     qMetric = bc_saveQMetrics(param, qMetric, forGUI, savePath);
     fprintf('\n Saved quality metrics from %s to %s \n', param.rawFile, savePath)
-    %% get some summary plots
-    
 catch
     warning('\n Warning, quality metrics from %s not saved! \n', param.rawFile)
 end
 
-unitType = bc_getQualityUnitType(param, qMetric);
-bc_plotGlobalQualityMetric(qMetric, param, unitType, uniqueTemplates, forGUI.tempWv);
+unitType = eaj_getQualityUnitType(param, qMetric);
+%bc_plotGlobalQualityMetric(qMetric, param, unitType, uniqueTemplates, forGUI.tempWv);
 end

@@ -24,7 +24,7 @@ if saveTSV
         'SNR','frac_RPVs' };
      
     cluster_id_vector = qMetric.clusterID - 1; % from bombcell to phy nomenclature 
-    if isfield(param,'ephysKilosortPath')
+    if any(strcmp(param.Properties.VariableNames,ephysKilosortPath'))
         saveTSV_path = param.ephysKilosortPath;
     else
         saveTSV_path = savePath;

@@ -1,4 +1,4 @@
-function param = bc_qualityParamValues(ephysMetaDir, rawFile, ephysKilosortPath)
+function param = bc_qualityParamValues(ephysMetaFile, rawFile, ephysKilosortPath)
 % JF, Load a parameter structure defining extraction and
 % classification parameters
 % ------
@@ -88,7 +88,7 @@ param.nChannels = 385; %number of recorded channels (including any sync channels
 % recorded in the raw data. This is usually 384 or 385 for neuropixels
 % recordings
 param.nSyncChannels = 1;
-param.ephysMetaFile = [ephysMetaDir.folder, filesep, ephysMetaDir.name];
+param.ephysMetaFile = ephysMetaFile;
 param.rawFile = rawFile;
 
 % distance metric parameters
