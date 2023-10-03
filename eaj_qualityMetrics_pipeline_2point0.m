@@ -8,16 +8,16 @@ addpath(genpath("C:\Users\Niflheim\Documents\GitHub\External\prettify_matlab"))
 
 %% set paths
 clearvars
-probe = 0;
-sessions = readtable('D:\WT_Sequences\all_sessions.csv');
-for s = 201:height(sessions) %[97,101-200]
-    epoch = string(sessions{s,'Epoch'});
+%%%sessions = readtable('D:\WT_Sequences\all_sessions.csv');
+sessions = readtable('Z:\WT_Sequences\2023_spring\Preprocessed_Data\Provenance\all_sessions.csv');
+for s = 350
+    task = string(sessions{s,'Task'});
     rec_error = string(sessions{s,'Recording_Error'});
-    if strcmp(epoch, 'g1') && strcmp(rec_error, 'FALSE')
+    for probe = 0:1
         % generate the path to the directory containing the ap.bin file
         base_dir = string(sessions{s,'Base_Directory'});
         base_dir = strrep(base_dir, '/', '\');
-        ecephys_path = strcat(base_dir, '\Preprocessed_Data\Spikes\g1');
+        ecephys_path = strcat(base_dir, '\Preprocessed_Data\Spikes');
 
         rec_file_stem = split(string(sessions{s,'File'}),'/');
         rec_file_stem = convertStringsToChars(rec_file_stem(2));
@@ -56,7 +56,4 @@ for s = 201:height(sessions) %[97,101-200]
         writetable(cluster_group, cluster_group_file, 'FileType', 'text', 'Delimiter', '\t');
 
     end
-    %end
 end
-
-
