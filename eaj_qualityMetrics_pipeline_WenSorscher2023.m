@@ -8,19 +8,19 @@ addpath(genpath("C:\Users\Niflheim\Documents\GitHub\External\prettify_matlab"))
 
 %% set paths
 clearvars
-sessions = readtable('Z:\WT_Sequences\2024_winter\Preprocessed_Data\Provenance\all_sessions.csv');
-for s = 1:height(sessions)
-    task = string(sessions{s,'Task'});
-    rec_error = string(sessions{s,'Recording_Error'});
-    for probe = 0:1
+sessions = readtable('//oak-smb-giocomo.stanford.edu/groups/giocomo/export/data/Projects/JohnKei_NPH3/WenSorscher2023_revisions/all_sessions.csv');
+    %'Z:\WT_Sequences\2023_spring\Preprocessed_Data\Provenance\all_sessions.csv'
+for s = 29
+    %rec_error = string(sessions{s,'Recording_Error'});
+    for probe = 0
         % generate the path to the directory containing the ap.bin file
         base_dir = string(sessions{s,'Base_Directory'});
         base_dir = strrep(base_dir, '/', '\');
-        ecephys_path = strcat(base_dir, '\Preprocessed_Data\Spikes');
+        ecephys_path = base_dir;
 
         rec_file_stem = split(string(sessions{s,'File'}),'/');
-        rec_file_stem = convertStringsToChars(rec_file_stem(2));
-        rec_file_path = sprintf('%s\\%s\\Ecephys\\%s\\catgt_%s\\%s_imec%d',...
+        rec_file_stem = convertStringsToChars(rec_file_stem);
+        rec_file_path = sprintf('%s\\%s\\SuperCat\\%s\\supercat_%s\\%s_imec%d',...
             ecephys_path, string(sessions{s,'Animal'}),...
             rec_file_stem(1:end-3), rec_file_stem,...
             rec_file_stem, probe);
